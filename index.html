@@ -158,71 +158,124 @@ footer {
 <body>
 
 <div class="topbar">
-  <span>Teams</span>
-  <span class="active">Players</span>
+  <span id="tabDivisions">Division</span>
+  <span id="tabPlayers" class="active">Players</span>
   <span>Shop</span>
   <span>Servers</span>
 </div>
 
+
 <div class="search-bar">
   <input id="search" placeholder="Search Players" />
+  <select id="rankFilter">
+    <option value="">All Ranks</option>
+    <option>Director</option>
+    <option>Deputy Director</option>
+    <option>Assistant Deputy Director</option>
+    <option>Assistant Director in-charge</option>
+    <option>Special Agent</option>
+    <option>Probationary Special Agent</option>
+  </select>
 </div>
+
+  <div class="container" id="divisionsSection" style="display:none;">
+  <div class="player-list">
+    <div class="player">Federal Bureau of Investigation</div>
+    <div class="player">Hostage Rescue Team</div>
+    <div class="player">Internal Affairs Division</div>
+  </div>
+  </div>
+  
 
 <div class="container">
 
   <div class="player-list" id="playerList"></div>
 
   <div class="side-panel" id="infoPanel">
-    <h3>Player Stats</h3>
-    <div class="stat"><span>Total Badges Earned</span><span>—</span></div>
-    <div class="stat"><span>Highest Wanted Level</span><span>0 Stars</span></div>
-    <div class="stat"><span>Law Enforcement XP</span><span>—</span></div>
-    <div class="stat"><span>Fire & Rescue XP</span><span>—</span></div>
-    <div class="stat"><span>Dept. of Transportation XP</span><span>—</span></div>
-    <div class="stat"><span>Job Points</span><span>—</span></div>
-  </div>
+  <h3>Player Stats</h3>
+  <div class="stat"><span>Callsign</span><span id="statCallsign">—</span></div>
+  <div class="stat"><span>Rank</span><span id="statRank">—</span></div>
+  <div class="stat"><span>Suspension</span><span id="statSuspended">—</span></div>
+</div>
+
 
 </div>
 
 <footer>© FBI TEAM ROBLOX – RP Interface</footer>
 
-<script>
-const players = [
-  { name: "AgentK_0081", handle: "@AgentK_0081", team: "Civilian" },
-  { name: "MinPRPO08", handle: "@MinPRPO08", team: "Civilian" },
-  { name: "crnac", handle: "@sasa_1236809", team: "River City Police Department" },
-  { name: "MinPRPO0878JMOJJalt", handle: "@MinPRPO0878JMOJJalt", team: "Liberty County Sheriff's Office" }
-];
+<script src="members.js"></script>
 
+<script>
 const list = document.getElementById('playerList');
 const search = document.getElementById('search');
+const rankFilter = document.getElementById('rankFilter');
 
-function render(filter = "") {
+const statCallsign = document.getElementById('statCallsign');
+const statRank = document.getElementById('statRank');
+const statSuspended = document.getElementById('statSuspended');
+
+function render() {
+  const query = search.value.toLowerCase();
+  const rank = rankFilter.value;
+
   list.innerHTML = "";
-  players.filter(p => p.name.toLowerCase().includes(filter)).forEach(p => {
-    const div = document.createElement('div');
-    div.className = 'player';
-    div.innerHTML = `
-      <div class="player-left">
-        <div class="avatar"></div>
-        <div>
-          <div class="player-name">${p.name}</div>
-          <div class="player-handle">${p.handle}</div>
+
+  players
+    .filter(p =>
+      p.username.toLowerCase().includes(query) &&
+      (!rank || p.rank === rank)
+    )
+    .forEach(p => {
+      const div = document.createElement('div');
+      div.className = 'player';
+
+      div.innerHTML = `
+        <div class="player-left">
+          <div class="avatar"></div>
+          <div>
+            <div class="player-name">${p.username}</div>
+          </div>
         </div>
-      </div>
-      <div class="team">${p.team}</div>
-    `;
-    div.onclick = () => {
-      document.querySelectorAll('.player').forEach(x => x.classList.remove('selected'));
-      div.classList.add('selected');
-    };
-    list.appendChild(div);
-  });
+      `;
+
+      div.onclick = () => {
+        document.querySelectorAll('.player').forEach(x => x.classList.remove('selected'));
+        div.classList.add('selected');
+
+        statCallsign.textContent = p.callsign;
+        statRank.textContent = p.rank;
+        statSuspended.textContent = p.suspended ? "Yes" : "No";
+      };
+
+      list.appendChild(div);
+    });
 }
 
-search.addEventListener('input', e => render(e.target.value.toLowerCase()));
+search.addEventListener('input', render);
+rankFilter.addEventListener('change', render);
 render();
 </script>
+  <script>
+const tabPlayers = document.getElementById("tabPlayers");
+const tabDivisions = document.getElementById("tabDivisions");
+const playersSection = document.querySelector(".container");
+const divisionsSection = document.getElementById("divisionsSection");
+
+tabPlayers.onclick = () => {
+  tabPlayers.classList.add("active");
+  tabDivisions.classList.remove("active");
+  playersSection.style.display = "grid";
+  divisionsSection.style.display = "none";
+};
+
+tabDivisions.onclick = () => {
+  tabDivisions.classList.add("active");
+  tabPlayers.classList.remove("active");
+  playersSection.style.display = "none";
+  divisionsSection.style.display = "grid";
+};
+  </script>
+  
 
 </body>
 </html>
