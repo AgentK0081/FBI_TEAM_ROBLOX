@@ -1,7 +1,4 @@
-const players = [
-  { username: "AgentK_0081", callsign: "FED001", rank: "Director", suspended: false },
-  { username: "MinPRPO08", callsign: "FED014", rank: "Special Agent", suspended: false },
-  { username: "crnac", callsign: "FED022", rank: "Probationary Special Agent", suspended: true }, 
+const players = [ 
   { callsign: "FED001", username: "HIM12345t", rank: "Director", suspended: false },
   { callsign: "FED002", username: "AgentK_0081", rank: "Deputy Director", suspended: false },
   { callsign: "FED003", username: "foohm123", rank: "Assistant Director", suspended: false },
