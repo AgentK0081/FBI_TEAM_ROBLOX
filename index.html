@@ -407,8 +407,10 @@ function render() {
       list.appendChild(div);
       const avatarImg = div.querySelector(".avatar");
 getRobloxAvatar(p.username).then(url => {
+  console.log("Avatar for", p.username, url);
   if (url) avatarImg.src = url;
 });
+
 
     });
 }
