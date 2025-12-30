@@ -356,9 +356,9 @@ function render() {
 
       list.appendChild(div);
       const avatarImg = div.querySelector(".avatar");
-avatarImg.src =
-  `https://thumbnails.roblox.com/v1/users/avatar-headshot?userIds=${p.userId}&size=48x48&format=Png&isCircular=false`;
-
+avatarImg.src = p.userId
+  ? `https://thumbnails.roblox.com/v1/users/avatar-headshot?userIds=${p.userId}&size=48x48&format=Png&isCircular=false`
+  : "default-avatar.png";
 
 
     });
