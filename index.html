@@ -337,13 +337,13 @@ function render() {
       div.className = 'player';
 
       div.innerHTML = `
-        <div class="player-left">
-          <img class="avatar" src="https://tr.rbxcdn.com/0fbb3b8b3d5f1c8b5c7c0d6f6f7b9f5e/48/48/AvatarHeadshot/Png">
-          <div>
-            <div class="player-name">${p.username}</div>
-          </div>
-        </div>
-      `;
+  <div class="player-left">
+    <img class="avatar" src="default-avatar.png">
+    <div>
+      <div class="player-name">${p.username}</div>
+    </div>
+  </div>
+`;
 
       div.onclick = () => {
         document.querySelectorAll('.player').forEach(x => x.classList.remove('selected'));
@@ -356,10 +356,8 @@ function render() {
 
       list.appendChild(div);
       const avatarImg = div.querySelector(".avatar");
-avatarImg.src =
-  p.userID && p.userID !== 1
-    ? `https://www.roblox.com/headshot-thumbnail/image?userId=${p.userID}&width=48&height=48&format=png`
-    : "default-avatar.png";
+<img class="avatar" src="default-avatar.png">
+
       
 
     });
