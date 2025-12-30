@@ -318,6 +318,7 @@ const statSuspended = document.getElementById('statSuspended');
 
   
   
+<script>
 function render() {
   const query = search.value.toLowerCase();
   const rank = rankFilter.value;
@@ -326,28 +327,28 @@ function render() {
 
   players
     .filter(p =>
-    (
-      p.username.toLowerCase().includes(query) ||
-      p.callsign.toLowerCase().includes(query)
-    ) &&
-    (!rank || p.rank === rank)
-  )
+      (
+        p.username.toLowerCase().includes(query) ||
+        p.callsign.toLowerCase().includes(query)
+      ) &&
+      (!rank || p.rank === rank)
+    )
     .forEach(p => {
-      const div = document.createElement('div');
-      div.className = 'player';
+      const div = document.createElement("div");
+      div.className = "player";
 
       div.innerHTML = `
-  <div class="player-left">
-    <img class="avatar" src="default-avatar.png">
-    <div>
-      <div class="player-name">${p.username}</div>
-    </div>
-  </div>
-`;
+        <div class="player-left">
+          <img class="avatar" src="default-avatar.png" loading="lazy">
+          <div>
+            <div class="player-name">${p.username}</div>
+          </div>
+        </div>
+      `;
 
       div.onclick = () => {
-        document.querySelectorAll('.player').forEach(x => x.classList.remove('selected'));
-        div.classList.add('selected');
+        document.querySelectorAll(".player").forEach(x => x.classList.remove("selected"));
+        div.classList.add("selected");
 
         statCallsign.textContent = p.callsign;
         statRank.textContent = p.rank;
@@ -355,19 +356,23 @@ function render() {
       };
 
       list.appendChild(div);
-      const avatarImg = div.querySelector(".avatar");
-<img class="avatar" src="default-avatar.png">
 
-      
-
+      /** ✅ SET ROBLOX AVATAR */
+      if (p.userId && Number.isInteger(p.userId)) {
+        const avatarImg = div.querySelector(".avatar");
+        avatarImg.src =
+          `https://thumbnails.roblox.com/v1/users/avatar-headshot` +
+          `?userIds=${p.userId}&size=48x48&format=Png&isCircular=false`;
+      }
     });
 }
 
-search.addEventListener('input', render);
-rankFilter.addEventListener('change', render);
+search.addEventListener("input", render);
+rankFilter.addEventListener("change", render);
 render();
 </script>
-  <script>
+  
+<script>
 const tabPlayers = document.getElementById("tabPlayers");
 const tabDivisions = document.getElementById("tabDivisions");
 const playersSection = document.getElementById("playersSection");
