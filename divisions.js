@@ -1,9 +1,9 @@
 const divisions = [
   {
     name: "Fugitive Task Force",
-    subtitle: "Public Roleplay Division",
-    image: "https://i.imgur.com/9QO6p5C.png",
-    discord: "https://discord.gg/yourinvite1"
+    subtitle: "We track down and capture the notorious and dangerous criminals on the FBI's most wanted list. We combine the efforts of federal, state, and local law enforcement agencies to locate and apprehend the most dangerous fugitives and assist on high profile investigations. The FBI Fugitive Task Force has obtained a federal arrest warrant for unlawful flight to avoid prosecution.",
+    image: "https://cdn.discordapp.com/attachments/1150770600160268349/1454861226629664839/IMG_20251228_233855.jpg?ex=69588f5a&is=69573dda&hm=0aef8f907ef0e7956b7f6ede4c8a34e5c815f043ba11102bcd7e822faa24b0a9&",
+    discord: "https://discord.gg/ymhbnTR82r"
   },
   {
     name: "Unusual Incidents Unit",
@@ -12,16 +12,16 @@ const divisions = [
     discord: "https://discord.gg/d8Ksmb2AbM"
   },
   {
-    name: "Firefighter",
-    subtitle: "River City Fire & Rescue",
+    name: "International Operations Division",
+    subtitle: "The FBI’s International Operations Division (IOD) is seeking driven individuals to help protect U.S. citizens and national security on the global stage. As part of our elite team, you’ll tackle terrorism, transnational crime, and other international threats in collaboration with law enforcement agencies and military partners worldwide.",
     image: "https://i.imgur.com/7oXzZ5Y.png",
-    discord: "https://discord.gg/yourinvite3"
+    discord: "https://discord.gg/pyJdCD4DBN"
   },
   {
-    name: "Police",
-    subtitle: "River City Police Department",
+    name: "Hostage Rescue Team",
+    subtitle: "Hostage Rescue Team",
     image: "https://i.imgur.com/1YxYwqf.png",
-    discord: "https://discord.gg/yourinvite4"
+    discord: "https://discord.gg/kUc4JDtRcQ"
   },
   {
     name: "DOT",
