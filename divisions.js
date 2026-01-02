@@ -1,7 +1,7 @@
 const divisions = [
   {
     name: "Fugitive Task Force",
-    subtitle: "We track down and capture the notorious and dangerous criminals on the FBI's most wanted list. We combine the efforts of federal, state, and local law enforcement agencies to locate and apprehend the most dangerous fugitives and assist on high profile investigations. The FBI Fugitive Task Force has obtained a federal arrest warrant for unlawful flight to avoid prosecution.",
+    subtitle: "We track down and capture the notorious and dangerous criminals on the FBI's most wanted list. We combine the efforts of federal, state, and local law enforcement agencies to locate and apprehend the most dangerous fugitives and assist on high profile investigations.",
     image: "https://cdn.discordapp.com/attachments/1150770600160268349/1454861226629664839/IMG_20251228_233855.jpg?ex=69588f5a&is=69573dda&hm=0aef8f907ef0e7956b7f6ede4c8a34e5c815f043ba11102bcd7e822faa24b0a9&",
     discord: "https://discord.gg/ymhbnTR82r"
   },
