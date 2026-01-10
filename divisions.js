@@ -24,8 +24,8 @@ const divisions = [
     discord: "https://discord.gg/kUc4JDtRcQ"
   },
   {
-    name: "DOT",
-    subtitle: "Department of Transportation",
+    name: "Division",
+    subtitle: "Discription",
     image: "https://i.imgur.com/LsZKz7H.png",
     discord: "https://discord.gg/yourinvite5"
   }
