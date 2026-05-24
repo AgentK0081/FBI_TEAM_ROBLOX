@@ -1,355 +1,710 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FiveM Server Template</title>
-    <!-- Tailwind CSS via CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Alpine.js via CDN -->
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    <!-- Poppins Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Custom Styles -->
-    <link rel="stylesheet" href="css/style.css">
-    <!-- Remix Icons -->
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css" rel="stylesheet">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        'poppins': ['Poppins', 'sans-serif'],
-                    },
-                }
-            }
-        }
-    </script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FBI TEAM ROBLOX — Official Portal</title>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Source+Sans+3:wght@300;400;500;600&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0a0e1a;
+    --navy2: #0f1428;
+    --navy3: #151c35;
+    --navy4: #1c2545;
+    --gold: #c9a84c;
+    --gold2: #e8c76a;
+    --gold3: #f5d98b;
+    --gold-dim: rgba(201,168,76,0.15);
+    --gold-border: rgba(201,168,76,0.3);
+    --text: #e8e6df;
+    --text-muted: #8a8fa8;
+    --text-dim: #555e7a;
+    --red: #c0392b;
+    --green: #1a8a4a;
+    --border: rgba(255,255,255,0.06);
+    --font-display: 'Oswald', sans-serif;
+    --font-body: 'Source Sans 3', sans-serif;
+    --font-mono: 'Share Tech Mono', monospace;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--navy);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.6;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* SCANLINE EFFECT */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.03) 2px, rgba(0,0,0,0.03) 4px);
+    pointer-events: none;
+    z-index: 1000;
+  }
+
+  /* HEADER */
+  header {
+    background: var(--navy2);
+    border-bottom: 1px solid var(--gold-border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .header-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2rem;
+    height: 64px;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .logo-badge {
+    width: 42px;
+    height: 42px;
+    position: relative;
+  }
+
+  .logo-badge svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .logo-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.1;
+  }
+
+  .logo-main {
+    font-family: var(--font-display);
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: var(--gold2);
+    text-transform: uppercase;
+  }
+
+  .logo-sub {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--text-muted);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .status-indicator {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--text-muted);
+    letter-spacing: 0.08em;
+  }
+
+  .status-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #22c55e;
+    animation: pulse-dot 2s infinite;
+  }
+
+  @keyframes pulse-dot {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  .btn {
+    font-family: var(--font-display);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 8px 20px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    text-decoration: none;
+  }
+
+  .btn-gold {
+    background: var(--gold);
+    color: var(--navy);
+  }
+  .btn-gold:hover { background: var(--gold2); }
+
+  .btn-outline {
+    background: transparent;
+    border: 1px solid var(--gold-border);
+    color: var(--gold);
+  }
+  .btn-outline:hover { border-color: var(--gold); background: var(--gold-dim); }
+
+  .btn-danger {
+    background: var(--red);
+    color: #fff;
+  }
+  .btn-danger:hover { background: #a93226; }
+
+  .btn-sm {
+    font-size: 11px;
+    padding: 5px 12px;
+  }
+
+  /* NAV */
+  nav {
+    background: var(--navy3);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    gap: 0;
+    overflow-x: auto;
+  }
+
+  .nav-item {
+    font-family: var(--font-display);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    padding: 13px 18px;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    user-select: none;
+  }
+
+  .nav-item:hover { color: var(--text); background: rgba(255,255,255,0.03); }
+  .nav-item.active { color: var(--gold2); border-bottom-color: var(--gold); }
+
+  .nav-badge {
+    background: var(--red);
+    color: #fff;
+    font-size: 10px;
+    font-family: var(--font-mono);
+    padding: 1px 5px;
+    border-radius: 3px;
+    min-width: 18px;
+    text-align: center;
+  }
+
+  /* PAGES */
+  .page { display: none; padding: 2rem; max-width: 1280px; margin: 0 auto; animation: fadeIn 0.3s ease; }
+  .page.active { display: block; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* PAGE HEADER */
+  .page-header {
+    border-left: 3px solid var(--gold);
+    padding-left: 1.2rem;
+    margin-bottom: 2rem;
+  }
+
+  .page-header h1 {
+    font-family: var(--font-display);
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--gold2);
+  }
+
+  .page-header p {
+    color: var(--text-muted);
+    font-size: 14px;
+    font-family: var(--font-mono);
+    letter-spacing: 0.05em;
+    margin-top: 2px;
+  }
+
+  /* SECTION LABEL */
+  .section-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--gold-border); }
+
+  /* CARD */
+  .card {
+    background: var(--navy2);
+    border: 1px solid var(--border);
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .card-gold {
+    border-color: var(--gold-border);
+    background: linear-gradient(135deg, var(--navy2) 0%, rgba(201,168,76,0.05) 100%);
+  }
+
+  /* GRID */
+  .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; }
+  .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; }
+  .grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; }
+  .grid-5 { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1rem; }
+
+  /* STAT CARDS */
+  .stat-card {
+    background: var(--navy3);
+    border: 1px solid var(--border);
+    padding: 1.2rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .stat-label { font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); letter-spacing: 0.1em; text-transform: uppercase; }
+  .stat-value { font-family: var(--font-display); font-size: 32px; font-weight: 700; color: var(--gold2); line-height: 1; }
+  .stat-sub { font-size: 12px; color: var(--text-dim); }
+
+  /* TABLE */
+  .data-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  .data-table th {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    padding: 10px 14px;
+    text-align: left;
+    border-bottom: 1px solid var(--gold-border);
+    background: var(--navy3);
+  }
+  .data-table td {
+    padding: 11px 14px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text);
+  }
+  .data-table tr:last-child td { border-bottom: none; }
+  .data-table tr:hover td { background: rgba(201,168,76,0.04); }
+
+  /* BADGES */
+  .badge {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 2px;
+  }
+  .badge-gold { background: rgba(201,168,76,0.15); color: var(--gold2); border: 1px solid var(--gold-border); }
+  .badge-red { background: rgba(192,57,43,0.2); color: #e74c3c; border: 1px solid rgba(192,57,43,0.4); }
+  .badge-green { background: rgba(26,138,74,0.2); color: #2ecc71; border: 1px solid rgba(26,138,74,0.4); }
+  .badge-blue { background: rgba(52,152,219,0.15); color: #5dade2; border: 1px solid rgba(52,152,219,0.3); }
+  .badge-orange { background: rgba(230,126,34,0.15); color: #f39c12; border: 1px solid rgba(230,126,34,0.3); }
+  .badge-gray { background: rgba(255,255,255,0.06); color: var(--text-muted); border: 1px solid var(--border); }
+
+  /* LEADERSHIP CARDS */
+  .leader-card {
+    background: var(--navy2);
+    border: 1px solid var(--border);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 10px;
+    transition: border-color 0.2s;
+  }
+  .leader-card:hover { border-color: var(--gold-border); }
+
+  .avatar-ring {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 2px solid var(--gold-border);
+    overflow: hidden;
+    background: var(--navy3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .avatar-ring img { width: 100%; height: 100%; object-fit: cover; }
+
+  .avatar-initials {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--gold);
+  }
+
+  .leader-rank {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+  .leader-name {
+    font-family: var(--font-display);
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text);
+    letter-spacing: 0.05em;
+  }
+  .leader-roblox {
+    font-size: 12px;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+  }
+
+  /* DIVISION CARD */
+  .division-card {
+    background: var(--navy2);
+    border: 1px solid var(--border);
+    padding: 1.5rem;
+    transition: all 0.2s;
+    cursor: pointer;
+  }
+  .division-card:hover { border-color: var(--gold-border); transform: translateY(-2px); }
+
+  .division-icon {
+    width: 44px;
+    height: 44px;
+    background: var(--gold-dim);
+    border: 1px solid var(--gold-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    margin-bottom: 12px;
+  }
+
+  .division-name {
+    font-family: var(--font-display);
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    color: var(--gold2);
+    margin-bottom: 6px;
+  }
+  .division-abbr {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+  }
+  .division-desc { font-size: 13px; color: var(--text-muted); line-height: 1.5; margin-bottom: 12px; }
+  .division-members { font-family: var(--font-mono); font-size: 11px; color: var(--text-dim); }
+
+  /* WANTED CARD */
+  .wanted-card {
+    background: var(--navy2);
+    border: 1px solid rgba(192,57,43,0.25);
+    padding: 1.2rem;
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+  .wanted-avatar {
+    width: 64px;
+    height: 64px;
+    background: var(--navy3);
+    border: 1px solid var(--border);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .wanted-info { flex: 1; }
+  .wanted-name { font-family: var(--font-display); font-size: 17px; font-weight: 600; color: #e74c3c; letter-spacing: 0.06em; }
+  .wanted-roblox { font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); margin-bottom: 6px; }
+  .wanted-charges { font-size: 13px; color: var(--text); margin-bottom: 8px; }
+  .wanted-meta { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+
+  /* INPUT */
+  .form-group { display: flex; flex-direction: column; gap: 6px; }
+  .form-label { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); }
+  .form-input {
+    background: var(--navy3);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 14px;
+    padding: 9px 12px;
+    outline: none;
+    transition: border-color 0.2s;
+    width: 100%;
+  }
+  .form-input:focus { border-color: var(--gold-border); }
+  .form-input::placeholder { color: var(--text-dim); }
+  textarea.form-input { resize: vertical; min-height: 100px; }
+  select.form-input { cursor: pointer; }
+
+  /* MODAL */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.75);
+    z-index: 500;
+    align-items: center;
+    justify-content: center;
+  }
+  .modal-overlay.open { display: flex; }
+
+  .modal {
+    background: var(--navy2);
+    border: 1px solid var(--gold-border);
+    padding: 2rem;
+    width: 100%;
+    max-width: 480px;
+    margin: 1rem;
+    animation: fadeIn 0.2s ease;
+  }
+
+  .modal-title {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--gold2);
+    margin-bottom: 0.3rem;
+  }
+  .modal-sub { font-size: 13px; color: var(--text-muted); margin-bottom: 1.5rem; }
+
+  /* TICKER */
+  .ticker {
+    background: var(--gold);
+    color: var(--navy);
+    padding: 5px 0;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  .ticker-inner {
+    display: inline-block;
+    animation: ticker 30s linear infinite;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+  }
+  @keyframes ticker {
+    from { transform: translateX(100vw); }
+    to { transform: translateX(-100%); }
+  }
+
+  /* ALERT BAR */
+  .alert-bar {
+    background: rgba(192,57,43,0.12);
+    border: 1px solid rgba(192,57,43,0.3);
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 1.5rem;
+    font-size: 13px;
+    color: #e74c3c;
+    font-family: var(--font-mono);
+  }
+  .alert-dot { width: 8px; height: 8px; background: #e74c3c; border-radius: 50%; flex-shrink: 0; animation: pulse-dot 1.5s infinite; }
+
+  /* SEARCH BAR */
+  .search-bar {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 1.5rem;
+  }
+  .search-bar .form-input { flex: 1; }
+
+  /* USER PROFILE STRIP */
+  .profile-strip {
+    background: var(--navy3);
+    border: 1px solid var(--gold-border);
+    padding: 10px 16px;
+    display: none;
+    align-items: center;
+    gap: 12px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 200;
+  }
+  .profile-strip.visible { display: flex; }
+
+  /* COMMAND REFERENCE */
+  .command-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .command-row:last-child { border-bottom: none; }
+  .command-code {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--gold2);
+    background: var(--gold-dim);
+    padding: 3px 10px;
+    border: 1px solid var(--gold-border);
+    white-space: nowrap;
+    flex-shrink: 0;
+    min-width: 200px;
+  }
+  .command-desc { font-size: 13px; color: var(--text-muted); }
+
+  /* ROBLOX LOGIN SECTION */
+  .roblox-login-card {
+    background: var(--navy2);
+    border: 1px solid var(--gold-border);
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 2.5rem;
+    text-align: center;
+  }
+
+  /* SCROLLBAR */
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: var(--navy); }
+  ::-webkit-scrollbar-thumb { background: var(--navy4); }
+  ::-webkit-scrollbar-thumb:hover { background: var(--gold-border); }
+
+  /* TOAST */
+  .toast {
+    position: fixed;
+    bottom: 80px;
+    right: 24px;
+    background: var(--navy3);
+    border: 1px solid var(--gold-border);
+    border-left: 3px solid var(--gold);
+    padding: 12px 18px;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--gold2);
+    z-index: 999;
+    display: none;
+    animation: fadeIn 0.2s ease;
+  }
+  .toast.visible { display: block; }
+
+  /* DIVIDER */
+  hr { border: none; border-top: 1px solid var(--border); margin: 1.5rem 0; }
+
+  .flex { display: flex; }
+  .items-center { align-items: center; }
+  .justify-between { justify-content: space-between; }
+  .gap-8 { gap: 8px; }
+  .gap-12 { gap: 12px; }
+  .mb-1 { margin-bottom: 0.5rem; }
+  .mb-2 { margin-bottom: 1rem; }
+  .mb-3 { margin-bottom: 1.5rem; }
+  .text-gold { color: var(--gold2); }
+  .text-muted { color: var(--text-muted); font-size: 13px; }
+  .text-mono { font-family: var(--font-mono); }
+  .font-display { font-family: var(--font-display); }
+  .uppercase { text-transform: uppercase; letter-spacing: 0.06em; }
+  .mt-2 { margin-top: 1rem; }
+
+  @media (max-width: 600px) {
+    .header-top { padding: 0 1rem; }
+    nav { padding: 0 1rem; }
+    .page { padding: 1rem; }
+    .grid-5 { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
 </head>
-<body class="bg-black font-poppins text-white">
-    <div class="custom-cursor"></div>
-    <div class="custom-cursor-trail"></div>
-    <!-- Navigation -->
-    <nav class="fixed w-full bg-gradient-to-b from-black/90 to-black/70 backdrop-blur-sm z-50 border-b border-white/10">
-        <div class="container mx-auto px-4 py-4">
-            <div class="flex items-center justify-between" x-data="{ mobileMenuOpen: false, activeSection: 'home' }" 
-                 @scroll.window="activeSection = ['home', 'about', 'team', 'rules', 'join'].reduce((active, section) => {
-                    const el = document.getElementById(section);
-                    if (!el) return active;
-                    const rect = el.getBoundingClientRect();
-                    return rect.top <= 100 && rect.bottom >= 100 ? section : active;
-                 }, activeSection)">
-                <div class="text-2xl font-bold relative group">
-                    <span class="relative z-10">Server Name</span>
-                    <div class="absolute inset-0 bg-gradient-to-r from-white/0 via-white/5 to-white/0 blur opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                </div>
-                
-                <!-- Desktop Menu -->
-                <div class="hidden md:flex space-x-8">
-                    <template x-for="(section, index) in ['home', 'about', 'team', 'rules', 'join']" :key="index">
-                        <a :href="'#' + section" 
-                           class="relative py-1 group"
-                           :class="{ 'text-white': activeSection === section, 'text-gray-400': activeSection !== section }">
-                            <span x-text="section.charAt(0).toUpperCase() + section.slice(1)" class="group-hover:text-white transition-colors"></span>
-                            <div class="absolute bottom-0 left-0 w-full h-[2px] bg-white transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"
-                                 :class="{ '!scale-x-100': activeSection === section }"></div>
-                        </a>
-                    </template>
-                </div>
+<body>
 
-                <!-- Mobile Menu Button -->
-                <button @click="mobileMenuOpen = !mobileMenuOpen" class="md:hidden text-white focus:outline-none">
-                    <i x-show="!mobileMenuOpen" class="ri-menu-line text-2xl"></i>
-                    <i x-show="mobileMenuOpen" class="ri-close-line text-2xl"></i>
-                </button>
+<!-- TICKER -->
+<div class="ticker">
+  <span class="ticker-inner">
+    ⬛ CLASSIFIED — FBI TEAM ROBLOX OFFICIAL PORTAL ⬛ AUTHORIZED PERSONNEL ONLY ⬛ ALL ACTIVITY IS MONITORED AND LOGGED ⬛ CURRENT THREAT LEVEL: ELEVATED ⬛ NEW WANTED REPORT FILED — SEE WANTED PAGE ⬛ DIVISION RECRUITMENT: APPLY NOW ⬛ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span>
+</div>
 
-                <!-- Mobile Menu -->
-                <div x-show="mobileMenuOpen" 
-                     x-transition:enter="transition ease-out duration-200"
-                     x-transition:enter-start="opacity-0 -translate-y-4"
-                     x-transition:enter-end="opacity-100 translate-y-0"
-                     x-transition:leave="transition ease-in duration-150"
-                     x-transition:leave-start="opacity-100 translate-y-0"
-                     x-transition:leave-end="opacity-0 -translate-y-4"
-                     class="absolute top-full left-0 right-0 bg-black/95 backdrop-blur-sm border-b border-white/10 p-4 md:hidden">
-                    <div class="flex flex-col space-y-4">
-                        <template x-for="(section, index) in ['home', 'about', 'team', 'rules', 'join']" :key="index">
-                            <a :href="'#' + section" 
-                               @click="mobileMenuOpen = false"
-                               class="group flex items-center relative py-2 px-3 rounded-lg transition-all duration-300"
-                               :class="{ 'bg-white/5': activeSection === section }">
-                                <i :class="{
-                                    'ri-home-line': section === 'home',
-                                    'ri-information-line': section === 'about',
-                                    'ri-team-line': section === 'team',
-                                    'ri-shield-check-line': section === 'rules',
-                                    'ri-gamepad-line': section === 'join'
-                                }" class="mr-2 text-white/70 group-hover:text-white transition-colors"></i>
-                                <span x-text="section.charAt(0).toUpperCase() + section.slice(1)"
-                                      :class="{ 'text-white': activeSection === section, 'text-gray-400': activeSection !== section }"
-                                      class="group-hover:text-white transition-colors"></span>
-                                <div class="absolute inset-0 bg-white/0 group-hover:bg-white/5 rounded-lg transition-colors -z-10"></div>
-                            </a>
-                        </template>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </nav>
+<!-- HEADER -->
+<header>
+  <div class="header-top">
+    <div class="logo">
+      <div class="logo-badge">
+        <svg viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="21,2 40,13 40,29 21,40 2,29 2,13" fill="#1c2545" stroke="#c9a84c" stroke-width="1.5"/>
+          <text x="21" y="20" text-anchor="middle" font-family="Oswald,sans-serif" font-size="9" fill="#c9a84c" font-weight="700" letter-spacing="1">FBI</text>
+          <text x="21" y="30" text-anchor="middle" font-family="Oswald,sans-serif" font-size="6" fill="#8a8fa8" letter-spacing="0.5">ROBLOX</text>
+        </svg>
+      </div>
+      <div class="logo-text">
+        <span class="logo-main">FBI Team Roblox</span>
+        <span class="logo-sub">Official Community Portal — Classified</span>
+      </div>
+    </div>
+    <div class="header-actions">
+      <div class="status-indicator">
+        <div class="status-dot"></div>
+        SYSTEMS ONLINE
+      </div>
+      <button class="btn btn-gold btn-sm" onclick="openLogin()">🔒 Agent Login</button>
+    </div>
+  </div>
+</header>
 
-    <!-- Hero Section -->
-    <section id="home" class="min-h-screen flex items-center justify-center relative overflow-hidden">
-        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-gray-900 via-black to-black"></div>
-        <div class="absolute inset-0 bg-grid-white/[0.02]"></div>
-        <div class="container mx-auto px-4 text-center relative z-10">
-            <div class="glitch-wrapper mb-6">
-                <h1 class="text-6xl md:text-8xl font-bold glitch-text">Server Name</h1>
-            </div>
-            <p class="text-xl md:text-2xl text-gray-300 mb-8 typing-text">Your Ultimate FiveM Experience</p>
-            <a href="#join" class="relative group bg-white/5 border border-white/10 text-white px-8 py-3 rounded-lg font-semibold hover:bg-white/10 hover:border-white/20 transition-all duration-300">
-                <span class="relative z-10">Join Now</span>
-                <div class="absolute inset-0 rounded-lg bg-gradient-to-r from-white/0 via-white/5 to-white/0 blur opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                <i class="ri-arrow-right-line ml-2 transition-transform duration-300 group-hover:translate-x-1"></i>
-            </a>
-        </div>
-    </section>
+<!-- NAVIGATION -->
+<nav>
+  <div class="nav-item active" onclick="showPage('information', this)">📋 Information</div>
+  <div class="nav-item" onclick="showPage('divisions', this)">🏛 Divisions</div>
+  <div class="nav-item" onclick="showPage('wanted', this)">🚨 Wanted Reports <span class="nav-badge" id="wanted-count">4</span></div>
+  <div class="nav-item" onclick="showPage('arrest-logs', this)">📁 Arrest Logs</div>
+  <div class="nav-item" onclick="showPage('player-list', this)">👥 Player List</div>
+  <div class="nav-item" onclick="showPage('bot-commands', this)">🤖 Bot Commands</div>
+  <div class="nav-item" onclick="showPage('appeals', this)">📝 Appeals</div>
+</nav>
 
-    <!-- About Section -->
-    <section id="about" class="py-20 bg-black">
-        <div class="container mx-auto px-4">
-            <h2 class="text-4xl font-bold mb-12 text-center">About Our Server</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="p-6 border border-white/10 rounded-lg hover:border-white/30 transition-all duration-300 hover:transform hover:scale-[1.02] hover:bg-white/[0.02] group">
-                    <div class="flex items-center mb-4">
-                        <i class="ri-gamepad-line text-2xl mr-3 text-white/70 group-hover:text-white transition-colors"></i>
-                        <h3 class="text-2xl font-semibold">Features</h3>
-                    </div>
-                    <p class="text-gray-400">Experience unique gameplay features and custom content.</p>
-                </div>
-                <div class="p-6 border border-white/10 rounded-lg hover:border-white/30 transition-all duration-300 hover:transform hover:scale-[1.02] hover:bg-white/[0.02] group">
-                    <div class="flex items-center mb-4">
-                        <i class="ri-team-line text-2xl mr-3 text-white/70 group-hover:text-white transition-colors"></i>
-                        <h3 class="text-2xl font-semibold">Community</h3>
-                    </div>
-                    <p class="text-gray-400">Join our friendly and active community of players.</p>
-                </div>
-                <div class="p-6 border border-white/10 rounded-lg hover:border-white/30 transition-all duration-300 hover:transform hover:scale-[1.02] hover:bg-white/[0.02] group">
-                    <div class="flex items-center mb-4">
-                        <i class="ri-customer-service-2-line text-2xl mr-3 text-white/70 group-hover:text-white transition-colors"></i>
-                        <h3 class="text-2xl font-semibold">Support</h3>
-                    </div>
-                    <p class="text-gray-400">24/7 support team ready to help you with any issues.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+<!-- =========================================================
+     PAGE: INFORMATION
+     ========================================================= -->
+<div class="page active" id="page-information">
+  <div class="page-header">
+    <h1>Bureau Information</h1>
+    <p>CLASSIFICATION: UNCLASSIFIED // LAST UPDATED: <span id="last-updated"></span></p>
+  </div>
 
-    <!-- Team Section -->
-    <section id="team" class="py-20 bg-black/50">
-        <div class="container mx-auto px-4">
-            <h2 class="text-4xl font-bold mb-12 text-center">Our Team</h2>
-            
-            <!-- Owner Section -->
-            <div class="mb-16">
-                <h3 class="text-2xl font-semibold mb-8 text-center flex items-center justify-center">
-                    <i class="ri-vip-crown-line mr-2"></i> Owner
-                </h3>
-                <div class="team-grid max-w-lg mx-auto">
-                    <div class="p-6 border border-white/10 rounded-lg text-center group hover:border-white/30 transition-all duration-300 hover:transform hover:scale-[1.02] hover:bg-white/[0.02] w-full max-w-sm mx-auto">
-                        <div class="w-24 h-24 rounded-full mx-auto mb-4 relative overflow-hidden">
-                            <img src="https://placehold.co/96x96" alt="Server Owner" class="w-full h-full object-cover">
-                            <div class="absolute inset-0 bg-gradient-to-tr from-white/5 via-white/0 to-white/0 group-hover:via-white/5 transition-all duration-500"></div>
-                        </div>
-                        <h3 class="text-xl font-semibold mb-2">Server Owner</h3>
-                        <p class="text-gray-400">Founder & Lead Developer</p>
-                        <div class="mt-4 flex justify-center space-x-3">
-                            <a href="https://discord.gg/placeholder" target="_blank" class="hover:scale-110 transition-transform">
-                                <i class="ri-discord-line text-white/50 group-hover:text-white transition-colors"></i>
-                            </a>
-                            <a href="https://steamcommunity.com/id/placeholder" target="_blank" class="hover:scale-110 transition-transform">
-                                <i class="ri-steam-line text-white/50 group-hover:text-white transition-colors"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+  <div class="grid-4 mb-3">
+    <div class="stat-card"><div class="stat-label">Active Agents</div><div class="stat-value">47</div><div class="stat-sub">↑ 3 this week</div></div>
+    <div class="stat-card"><div class="stat-label">Arrests (30d)</div><div class="stat-value">128</div><div class="stat-sub">↑ 12% from last month</div></div>
+    <div class="stat-card"><div class="stat-label">Active Warrants</div><div class="stat-value">4</div><div class="stat-sub">2 critical</div></div>
+    <div class="stat-card"><div class="stat-label">Divisions</div><div class="stat-value">6</div><div class="stat-sub">All operational</div></div>
+  </div>
 
-            <!-- Administrators Section -->
-            <div class="mb-16">
-                <h3 class="text-2xl font-semibold mb-8 text-center flex items-center justify-center">
-                    <i class="ri-shield-star-line mr-2"></i> Administrators
-                </h3>
-                <div class="team-grid max-w-4xl mx-auto">
-                    <!-- Admin 1 -->
-                    <div class="p-6 border border-white/10 rounded-lg text-center group hover:border-white/30 transition-all duration-300 hover:transform hover:scale-[1.02] hover:bg-white/[0.02] w-full max-w-sm mx-auto">
-                        <div class="w-24 h-24 rounded-full mx-auto mb-4 relative overflow-hidden">
-                            <img src="https://placehold.co/96x96" alt="Admin Name" class="w-full h-full object-cover">
-                            <div class="absolute inset-0 bg-gradient-to-tr from-white/5 via-white/0 to-white/0 group-hover:via-white/5 transition-all duration-500"></div>
-                        </div>
-                        <h3 class="text-xl font-semibold mb-2">Admin Name</h3>
-                        <p class="text-gray-400">Head Administrator</p>
-                        <div class="mt-4 flex justify-center space-x-3">
-                            <a href="https://discord.gg/placeholder" target="_blank" class="hover:scale-110 transition-transform">
-                                <i class="ri-discord-line text-white/50 group-hover:text-white transition-colors"></i>
-                            </a>
-                            <a href="https://steamcommunity.com/id/placeholder" target="_blank" class="hover:scale-110 transition-transform">
-                                <i class="ri-steam-line text-white/50 group-hover:text-white transition-colors"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <!-- Add more admins by copying the above div -->
-                </div>
-            </div>
-
-            <!-- Moderators Section -->
-            <div class="mb-16">
-                <h3 class="text-2xl font-semibold mb-8 text-center flex items-center justify-center">
-                    <i class="ri-shield-check-line mr-2"></i> Moderators
-                </h3>
-                <div class="team-grid max-w-4xl mx-auto">
-                    <!-- Moderator 1 -->
-                    <div class="p-6 border border-white/10 rounded-lg text-center group hover:border-white/30 transition-all duration-300 hover:transform hover:scale-[1.02] hover:bg-white/[0.02] w-full max-w-sm mx-auto">
-                        <div class="w-24 h-24 rounded-full mx-auto mb-4 relative overflow-hidden">
-                            <img src="https://placehold.co/96x96" alt="Mod Name" class="w-full h-full object-cover">
-                            <div class="absolute inset-0 bg-gradient-to-tr from-white/5 via-white/0 to-white/0 group-hover:via-white/5 transition-all duration-500"></div>
-                        </div>
-                        <h3 class="text-xl font-semibold mb-2">Mod Name</h3>
-                        <p class="text-gray-400">Senior Moderator</p>
-                        <div class="mt-4 flex justify-center space-x-3">
-                            <a href="https://discord.gg/placeholder" target="_blank" class="hover:scale-110 transition-transform">
-                                <i class="ri-discord-line text-white/50 group-hover:text-white transition-colors"></i>
-                            </a>
-                            <a href="https://steamcommunity.com/id/placeholder" target="_blank" class="hover:scale-110 transition-transform">
-                                <i class="ri-steam-line text-white/50 group-hover:text-white transition-colors"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <!-- Add more moderators by copying the above div -->
-                </div>
-            </div>
-
-            <!-- Support Team Section -->
-            <div>
-                <h3 class="text-2xl font-semibold mb-8 text-center flex items-center justify-center">
-                    <i class="ri-customer-service-2-line mr-2"></i> Support Team
-                </h3>
-                <div class="team-grid max-w-4xl mx-auto">
-                    <!-- Support Member 1 -->
-                    <div class="p-6 border border-white/10 rounded-lg text-center group hover:border-white/30 transition-all duration-300 hover:transform hover:scale-[1.02] hover:bg-white/[0.02] w-full max-w-sm mx-auto">
-                        <div class="w-24 h-24 rounded-full mx-auto mb-4 relative overflow-hidden">
-                            <img src="https://placehold.co/96x96" alt="Support Name" class="w-full h-full object-cover">
-                            <div class="absolute inset-0 bg-gradient-to-tr from-white/5 via-white/0 to-white/0 group-hover:via-white/5 transition-all duration-500"></div>
-                        </div>
-                        <h3 class="text-xl font-semibold mb-2">Support Name</h3>
-                        <p class="text-gray-400">Support Specialist</p>
-                        <div class="mt-4 flex justify-center space-x-3">
-                            <a href="https://discord.gg/placeholder" target="_blank" class="hover:scale-110 transition-transform">
-                                <i class="ri-discord-line text-white/50 group-hover:text-white transition-colors"></i>
-                            </a>
-                            <a href="https://steamcommunity.com/id/placeholder" target="_blank" class="hover:scale-110 transition-transform">
-                                <i class="ri-steam-line text-white/50 group-hover:text-white transition-colors"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <!-- Add more support members by copying the above div -->
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Rules Section -->
-    <section id="rules" class="py-20 bg-black">
-        <div class="container mx-auto px-4">
-            <h2 class="text-4xl font-bold mb-12 text-center">Server Rules</h2>
-            <div class="max-w-3xl mx-auto space-y-6">
-                <div class="p-6 border border-white/10 rounded-lg group hover:border-white/30 transition-all duration-300 hover:transform hover:scale-[1.01] hover:bg-white/[0.02]">
-                    <div class="flex items-center mb-4">
-                        <i class="ri-shield-check-line text-2xl mr-3 text-white/70 group-hover:text-white transition-colors"></i>
-                        <h3 class="text-2xl font-semibold">General Rules</h3>
-                    </div>
-                    <ul class="list-none text-gray-400 space-y-3">
-                        <li class="flex items-center">
-                            <i class="ri-checkbox-circle-line mr-2 text-white/30 group-hover:text-white/50 transition-colors"></i>
-                            Respect all players and staff members
-                        </li>
-                        <li class="flex items-center">
-                            <i class="ri-checkbox-circle-line mr-2 text-white/30 group-hover:text-white/50 transition-colors"></i>
-                            No cheating or exploiting
-                        </li>
-                        <li class="flex items-center">
-                            <i class="ri-checkbox-circle-line mr-2 text-white/30 group-hover:text-white/50 transition-colors"></i>
-                            No harassment or discrimination
-                        </li>
-                        <li class="flex items-center">
-                            <i class="ri-checkbox-circle-line mr-2 text-white/30 group-hover:text-white/50 transition-colors"></i>
-                            Follow staff instructions
-                        </li>
-                    </ul>
-                </div>
-                <!-- Add more rule categories here -->
-            </div>
-        </div>
-    </section>
-
-    <!-- Join Section -->
-    <section id="join" class="min-h-screen flex items-center justify-center relative overflow-hidden bg-black">
-        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-gray-900 via-black to-black opacity-50"></div>
-        <div class="absolute inset-0 bg-grid-white/[0.02]"></div>
-        <div class="absolute inset-0 animate-pulse-slow bg-gradient-to-b from-transparent via-white/[0.02] to-transparent"></div>
-        <div class="container mx-auto px-4 text-center relative z-10">
-            <h2 class="text-4xl font-bold mb-8 glitch-text">Join Our Server</h2>
-            <div class="max-w-3xl mx-auto">
-                <!-- Server IP Card -->
-                <div class="p-8 border border-white/10 rounded-2xl bg-black/30 backdrop-blur-sm mb-8 transform hover:scale-[1.02] transition-all duration-300 group">
-                    <div class="flex items-center justify-center mb-4">
-                        <i class="ri-server-line text-3xl text-white/70 group-hover:text-white transition-colors mr-3"></i>
-                        <h3 class="text-2xl font-semibold">Server Address</h3>
-                    </div>
-                    <div class="bg-black/50 p-4 rounded-xl border border-white/10 text-center">
-                        <code class="text-xl font-mono text-white/90 select-all">your-server-ip</code>
-                    </div>
-                </div>
-
-                <!-- Join Options -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <a href="#" class="group p-6 border border-white/10 rounded-2xl bg-black/30 backdrop-blur-sm hover:bg-white/5 transition-all duration-300 flex flex-col items-center">
-                        <div class="w-16 h-16 rounded-full bg-white/5 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                            <i class="ri-discord-line text-3xl text-white/70 group-hover:text-white transition-colors"></i>
-                        </div>
-                        <h3 class="text-xl font-semibold mb-2">Join Discord</h3>
-                        <p class="text-white/70 text-center">Connect with our community</p>
-                        <div class="mt-4 text-sm text-white/50">Click to join →</div>
-                    </a>
-
-                    <a href="#" class="group p-6 border border-white/10 rounded-2xl bg-black/30 backdrop-blur-sm hover:bg-white/5 transition-all duration-300 flex flex-col items-center">
-                        <div class="w-16 h-16 rounded-full bg-white/5 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                            <i class="ri-discuss-line text-3xl text-white/70 group-hover:text-white transition-colors"></i>
-                        </div>
-                        <h3 class="text-xl font-semibold mb-2">Visit Forums</h3>
-                        <p class="text-white/70 text-center">Discuss and share with others</p>
-                        <div class="mt-4 text-sm text-white/50">Click to browse →</div>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="py-8 bg-black border-t border-white/10">
-        <div class="container mx-auto px-4 text-center">
-            <p class="text-gray-400">&copy; 2025 Server Name. All rights reserved.</p>
-            <div class="mt-4 text-sm">
-                <span class="text-gray-600">Template by</span>
-                <a href="https://fourtwenty.dev" target="_blank" rel="noopener" 
-                   class="inline-flex items-center text-gray-400 hover:text-white transition-colors ml-2 group">
-                    FourTwentyDevs
-                    <i class="ri-external-link-line ml-1 text-gray-600 group-hover:text-white transition-colors"></i>
-                </a>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Custom JavaScript -->
-    <script src="js/main.js"></script>
-</body>
-</html>
+  <div class="section-label">Mission Statement</div>
+  <div class="card card-gold mb-3">
+    <div sty
